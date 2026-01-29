@@ -43,6 +43,14 @@ A powerful Chrome extension that combines the Pomodoro technique with strict foc
 - Toggle strict mode
 - Enable/disable notifications and sounds
 
+## 📸 Screenshots
+
+### Home Screen
+![Focus Lock Home](screenshots/Focus_lock_home.jpeg)
+
+### Setup Screen
+![Focus Lock Setup](screenshots/Focus_lock_setup.jpeg)
+
 ## 🚀 Installation
 
 ### Method 1: Load as Unpacked Extension (Development)
