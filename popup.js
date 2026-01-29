@@ -19,7 +19,9 @@ async function loadData() {
     state: 'idle',
     timeRemaining: 25 * 60,
     sessionsCompleted: 0,
-    lastUpdate: Date.now()
+    lastUpdate: Date.now(),
+    currentFocusTopic: '',
+    currentFocusSubject: ''
   };
   
   // Get settings
@@ -34,6 +36,9 @@ async function loadData() {
     soundEnabled: true,
     notificationsEnabled: true,
     strictMode: true,
+    username: '',
+    soundscapeEnabled: false,
+    selectedSoundscape: 'none',
     blacklist: [],
     whitelist: []
   };
@@ -50,7 +55,7 @@ function setupEventListeners() {
   
   // Control buttons
   document.querySelector('.start-btn').addEventListener('click', () => {
-    chrome.runtime.sendMessage({ type: 'START_TIMER' });
+    showFocusTopicPrompt();
   });
   
   document.querySelector('.pause-btn').addEventListener('click', () => {
@@ -59,6 +64,12 @@ function setupEventListeners() {
   
   document.querySelector('.reset-btn').addEventListener('click', () => {
     chrome.runtime.sendMessage({ type: 'RESET_TIMER' });
+  });
+  
+  document.querySelector('.end-session-btn').addEventListener('click', () => {
+    if (confirm('Are you sure you want to end this session?')) {
+      chrome.runtime.sendMessage({ type: 'END_SESSION' });
+    }
   });
   
   // Mode buttons
@@ -80,6 +91,22 @@ function setupEventListeners() {
       timerState = changes.timerState.newValue;
       updateUI();
     }
+  });
+}
+
+// Show focus topic prompt before starting
+function showFocusTopicPrompt() {
+  const prompt = window.prompt('What are you focusing on today? (Optional)', timerState.currentFocusTopic || '');
+  
+  if (prompt === null) {
+    // User cancelled
+    return;
+  }
+  
+  chrome.runtime.sendMessage({ 
+    type: 'START_TIMER',
+    focusTopic: prompt.trim(),
+    focusSubject: ''
   });
 }
 
@@ -114,13 +141,16 @@ function updateUI() {
   // Update control buttons
   const startBtn = document.querySelector('.start-btn');
   const pauseBtn = document.querySelector('.pause-btn');
+  const endSessionBtn = document.querySelector('.end-session-btn');
   
   if (timerState.state === 'running') {
     startBtn.classList.add('hidden');
     pauseBtn.classList.remove('hidden');
+    endSessionBtn.classList.remove('hidden');
   } else {
     startBtn.classList.remove('hidden');
     pauseBtn.classList.add('hidden');
+    endSessionBtn.classList.add('hidden');
   }
   
   // Update progress bar
