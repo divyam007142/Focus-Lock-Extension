@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusLock Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="options-container">
+    <header class="header">
+      <h1 class="title">🔒 FocusLock Settings</h1>
+      <button class="save-btn" data-testid="save-settings-button">Save Settings</button>
+    </header>
+    
+    <div class="content">
+      <!-- Timer Settings -->
+      <section class="settings-section">
+        <h2 class="section-title">⏱️ Timer Settings</h2>
+        <div class="setting-group">
+          <label class="setting-label">
+            Focus Duration (minutes)
+            <input type="number" class="setting-input" data-setting="focusDuration" min="1" max="120" data-testid="focus-duration-input" />
+          </label>
+        </div>
+        <div class="setting-group">
+          <label class="setting-label">
+            Short Break Duration (minutes)
+            <input type="number" class="setting-input" data-setting="shortBreakDuration" min="1" max="60" data-testid="short-break-duration-input" />
+          </label>
+        </div>
+        <div class="setting-group">
+          <label class="setting-label">
+            Long Break Duration (minutes)
+            <input type="number" class="setting-input" data-setting="longBreakDuration" min="1" max="120" data-testid="long-break-duration-input" />
+          </label>
+        </div>
+        <div class="setting-group">
+          <label class="setting-label">
+            Long Break After (focus sessions)
+            <input type="number" class="setting-input" data-setting="sessionsUntilLongBreak" min="1" max="10" data-testid="sessions-until-long-break-input" />
+          </label>
+        </div>
+      </section>
+      
+      <!-- Behavior Settings -->
+      <section class="settings-section">
+        <h2 class="section-title">⚙️ Behavior</h2>
+        <div class="setting-group">
+          <label class="checkbox-label">
+            <input type="checkbox" class="setting-checkbox" data-setting="autoStartBreaks" data-testid="auto-start-breaks-checkbox" />
+            <span>Auto-start breaks</span>
+          </label>
+        </div>
+        <div class="setting-group">
+          <label class="checkbox-label">
+            <input type="checkbox" class="setting-checkbox" data-setting="autoStartFocus" data-testid="auto-start-focus-checkbox" />
+            <span>Auto-start focus after break</span>
+          </label>
+        </div>
+        <div class="setting-group">
+          <label class="checkbox-label">
+            <input type="checkbox" class="setting-checkbox" data-setting="strictMode" data-testid="strict-mode-checkbox" />
+            <span>Strict Mode (block tab switching & distracting sites)</span>
+          </label>
+        </div>
+      </section>
+      
+      <!-- Notifications -->
+      <section class="settings-section">
+        <h2 class="section-title">🔔 Notifications</h2>
+        <div class="setting-group">
+          <label class="checkbox-label">
+            <input type="checkbox" class="setting-checkbox" data-setting="soundEnabled" data-testid="sound-enabled-checkbox" />
+            <span>Enable sound notifications</span>
+          </label>
+        </div>
+        <div class="setting-group">
+          <label class="checkbox-label">
+            <input type="checkbox" class="setting-checkbox" data-setting="notificationsEnabled" data-testid="notifications-enabled-checkbox" />
+            <span>Enable browser notifications</span>
+          </label>
+        </div>
+      </section>
+      
+      <!-- Blacklist -->
+      <section class="settings-section">
+        <h2 class="section-title">🚫 Blocked Sites (Blacklist)</h2>
+        <p class="section-description">Sites blocked during focus mode. Enter domain names without http://</p>
+        <div class="list-input-group">
+          <input type="text" class="list-input" placeholder="e.g., facebook.com" data-testid="blacklist-input" />
+          <button class="add-btn" data-list="blacklist" data-testid="add-blacklist-button">Add</button>
+        </div>
+        <div class="list-container" data-list="blacklist" data-testid="blacklist-container">
+          <!-- Blacklist items will be added here -->
+        </div>
+      </section>
+      
+      <!-- Whitelist -->
+      <section class="settings-section">
+        <h2 class="section-title">✅ Allowed Sites (Whitelist)</h2>
+        <p class="section-description">Sites always accessible during focus mode</p>
+        <div class="list-input-group">
+          <input type="text" class="list-input" placeholder="e.g., wikipedia.org" data-testid="whitelist-input" />
+          <button class="add-btn" data-list="whitelist" data-testid="add-whitelist-button">Add</button>
+        </div>
+        <div class="list-container" data-list="whitelist" data-testid="whitelist-container">
+          <!-- Whitelist items will be added here -->
+        </div>
+      </section>
+      
+      <!-- Reset Section -->
+      <section class="settings-section">
+        <h2 class="section-title">🔄 Reset</h2>
+        <button class="danger-btn" data-testid="reset-settings-button">Reset to Default Settings</button>
+      </section>
+    </div>
+    
+    <div class="toast hidden" data-testid="toast-message">Settings saved successfully!</div>
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html>
