@@ -158,6 +158,8 @@ function setupEventListeners() {
       loadData();
     } else if (message.type === 'PLAY_WARNING_SOUND') {
       playWarningSound();
+    } else if (message.type === 'SESSION_COMPLETE') {
+      showCompletionNotification(message.mode);
     }
   });
 }
