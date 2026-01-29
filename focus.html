@@ -12,6 +12,14 @@
   
   <!-- Main content -->
   <div class="content-container">
+    <!-- Greeting and Focus Topic -->
+    <div class="greeting-section" data-testid="greeting-section">
+      <div class="greeting-text" data-testid="greeting-text">Good morning, User</div>
+      <div class="focus-topic-display" data-testid="focus-topic-display">
+        <!-- Focus topic and quote will be displayed here -->
+      </div>
+    </div>
+    
     <!-- Mode tabs at top -->
     <div class="mode-tabs" data-testid="mode-tabs">
       <button class="mode-tab active" data-mode="focus" data-testid="focus-tab">
@@ -44,9 +52,36 @@
         <span class="btn-icon">⏸</span>
         <span class="btn-text">Pause</span>
       </button>
+      <button class="control-btn end-session-btn hidden" data-testid="end-session-button">
+        <span class="btn-icon">⏹</span>
+        <span class="btn-text">End Session</span>
+      </button>
       <button class="control-btn-small reset-btn" data-testid="reset-button">
         <span>↻</span>
       </button>
+    </div>
+    
+    <!-- Soundscape Player -->
+    <div class="soundscape-container" data-testid="soundscape-container">
+      <div class="soundscape-header">
+        <span class="soundscape-icon">🎵</span>
+        <span class="soundscape-title">Focus Soundscapes</span>
+      </div>
+      <div class="soundscape-controls">
+        <select class="soundscape-selector" data-testid="soundscape-selector">
+          <option value="none">No Sound</option>
+          <option value="spring">Spring Sounds</option>
+          <option value="birds-forest">Birds & Forest</option>
+          <option value="nature-ambience">Nature Ambience</option>
+          <option value="ocean-waves">Ocean Waves</option>
+          <option value="relaxing-rain">Relaxing Rain</option>
+        </select>
+        <button class="soundscape-play-btn" data-testid="soundscape-play-btn">
+          <span class="play-icon">▶</span>
+        </button>
+        <input type="range" class="soundscape-volume" data-testid="soundscape-volume" min="0" max="100" value="50">
+        <span class="volume-icon">🔊</span>
+      </div>
     </div>
     
     <!-- Session counter -->
