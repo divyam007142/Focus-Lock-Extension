@@ -46,7 +46,8 @@
         "assets/birds-forest.mp3",
         "assets/nature-ambience.mp3",
         "assets/ocean-waves.mp3",
-        "assets/relaxing-rain.mp3"
+        "assets/relaxing-rain.mp3",
+        "assets/completion-notification.mp3"
       ],
       "matches": ["<all_urls>"]
     }
