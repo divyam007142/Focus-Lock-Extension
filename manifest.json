@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "FocusLock",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A powerful Pomodoro timer with strict focus mode to boost your productivity",
   "permissions": [
     "storage",
@@ -38,7 +38,16 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["focus.html", "assets/*"],
+      "resources": [
+        "focus.html",
+        "assets/*",
+        "assets/error.mp3",
+        "assets/spring.mp3",
+        "assets/birds-forest.mp3",
+        "assets/nature-ambience.mp3",
+        "assets/ocean-waves.mp3",
+        "assets/relaxing-rain.mp3"
+      ],
       "matches": ["<all_urls>"]
     }
   ],
