@@ -297,6 +297,15 @@ async function updateTimer() {
 // Handle timer completion
 async function handleTimerComplete(timerState) {
   const settings = await getSettings();
+  const completedMode = timerState.mode; // Store the mode that just completed
+  
+  // Send completion message to focus page
+  chrome.runtime.sendMessage({ 
+    type: 'SESSION_COMPLETE',
+    mode: completedMode
+  }).catch(() => {
+    // Ignore if no receivers
+  });
   
   // Play notification sound and show alert
   if (settings.notificationsEnabled) {
@@ -310,7 +319,7 @@ async function handleTimerComplete(timerState) {
       type: 'basic',
       iconUrl: 'icons/icon-128.png',
       title: 'FocusLock',
-      message: messages[timerState.mode],
+      message: messages[completedMode],
       priority: 2
     });
   }
