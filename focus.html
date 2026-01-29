@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusLock - Stay Focused</title>
+  <link rel="stylesheet" href="focus.css">
+</head>
+<body>
+  <!-- Mountain background with overlay -->
+  <div class="background-container"></div>
+  
+  <!-- Main content -->
+  <div class="content-container">
+    <!-- Mode tabs at top -->
+    <div class="mode-tabs" data-testid="mode-tabs">
+      <button class="mode-tab active" data-mode="focus" data-testid="focus-tab">
+        <span class="tab-icon">🎯</span>
+        <span>Focus</span>
+      </button>
+      <button class="mode-tab" data-mode="shortBreak" data-testid="short-break-tab">
+        <span class="tab-icon">☕</span>
+        <span>Short Break</span>
+      </button>
+      <button class="mode-tab" data-mode="longBreak" data-testid="long-break-tab">
+        <span class="tab-icon">🌴</span>
+        <span>Long Break</span>
+      </button>
+    </div>
+    
+    <!-- Large timer display -->
+    <div class="timer-container" data-testid="timer-container">
+      <div class="timer-display" data-testid="timer-display">25:00</div>
+      <div class="timer-label" data-testid="timer-label">Focus Time</div>
+    </div>
+    
+    <!-- Control button -->
+    <div class="controls-container">
+      <button class="control-btn start-btn" data-testid="start-button">
+        <span class="btn-icon">▶</span>
+        <span class="btn-text">Start</span>
+      </button>
+      <button class="control-btn pause-btn hidden" data-testid="pause-button">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button class="control-btn-small reset-btn" data-testid="reset-button">
+        <span>↻</span>
+      </button>
+    </div>
+    
+    <!-- Session counter -->
+    <div class="session-counter" data-testid="session-counter">
+      <span>Sessions completed: </span>
+      <span class="session-count" data-testid="session-count">0</span>
+    </div>
+    
+    <!-- Task input section -->
+    <div class="task-input-section" data-testid="task-input-section">
+      <div class="input-row">
+        <select class="subject-selector" data-testid="subject-selector">
+          <option value="">Select Subject</option>
+          <option value="Work">💼 Work</option>
+          <option value="Study">📚 Study</option>
+          <option value="Exercise">🏃 Exercise</option>
+          <option value="Reading">📖 Reading</option>
+          <option value="Writing">✍️ Writing</option>
+          <option value="Other">📝 Other</option>
+        </select>
+        <input 
+          type="text" 
+          class="task-input" 
+          placeholder="What are you focusing on?"
+          data-testid="task-input"
+        />
+        <button class="add-task-btn" data-testid="add-task-button">+</button>
+      </div>
+    </div>
+    
+    <!-- Task cards at bottom -->
+    <div class="tasks-container" data-testid="tasks-container">
+      <!-- Task cards will be dynamically added here -->
+    </div>
+    
+    <!-- Blocked site warning (shown when applicable) -->
+    <div class="warning-message hidden" data-testid="warning-message">
+      <div class="warning-icon">⚠️</div>
+      <div class="warning-text">
+        <strong>Focus Mode Active</strong>
+        <p>This site is blocked during focus sessions. Stay focused!</p>
+      </div>
+    </div>
+  </div>
+  
+  <script src="focus.js"></script>
+</body>
+</html>
