@@ -474,3 +474,55 @@ function playWarningSound() {
     console.log('Error playing warning sound:', e);
   }
 }
+
+// Play completion notification sound
+function playCompletionSound() {
+  try {
+    const audio = new Audio(chrome.runtime.getURL('assets/completion-notification.mp3'));
+    audio.volume = 0.7;
+    audio.play().catch(err => console.log('Could not play completion sound:', err));
+  } catch (e) {
+    console.log('Error playing completion sound:', e);
+  }
+}
+
+// Show completion notification
+function showCompletionNotification(mode) {
+  const messages = {
+    focus: {
+      title: 'Great job! 🎉',
+      message: 'Focus session completed successfully! Time for a well-deserved break.'
+    },
+    shortBreak: {
+      title: 'Break Complete! ☕',
+      message: 'Short break is over. Ready to focus again?'
+    },
+    longBreak: {
+      title: 'Long Break Complete! 🌴',
+      message: 'You\'re refreshed and ready for another productive session!'
+    }
+  };
+
+  const notification = document.querySelector('.completion-notification');
+  const titleEl = notification.querySelector('.notification-title');
+  const messageEl = notification.querySelector('.notification-message');
+  
+  const content = messages[mode] || messages.focus;
+  titleEl.textContent = content.title;
+  messageEl.textContent = content.message;
+  
+  // Play completion sound
+  playCompletionSound();
+  
+  // Show notification
+  notification.classList.remove('hidden');
+  notification.style.animation = 'scaleIn 0.3s ease';
+  
+  // Hide after 4 seconds
+  setTimeout(() => {
+    notification.style.animation = 'scaleOut 0.3s ease';
+    setTimeout(() => {
+      notification.classList.add('hidden');
+    }, 300);
+  }, 4000);
+}
