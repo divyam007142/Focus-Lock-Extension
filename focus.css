@@ -203,6 +203,16 @@ body {
   transform: translateY(0);
 }
 
+.control-btn.end-session-btn {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.control-btn.end-session-btn:hover {
+  background: rgba(239, 68, 68, 0.5);
+  border-color: rgba(239, 68, 68, 0.7);
+}
+
 .control-btn-small {
   padding: 1rem 1.5rem;
   border: none;
