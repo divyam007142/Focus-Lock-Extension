@@ -12,15 +12,13 @@
   
   <!-- Main content -->
   <div class="content-container">
-    <!-- Greeting and Focus Topic -->
+    
+    <!-- Greeting at top -->
     <div class="greeting-section" data-testid="greeting-section">
       <div class="greeting-text" data-testid="greeting-text">Good morning, User</div>
-      <div class="focus-topic-display" data-testid="focus-topic-display">
-        <!-- Focus topic and quote will be displayed here -->
-      </div>
     </div>
     
-    <!-- Mode tabs at top -->
+    <!-- Mode tabs -->
     <div class="mode-tabs" data-testid="mode-tabs">
       <button class="mode-tab active" data-mode="focus" data-testid="focus-tab">
         <span class="tab-icon">🎯</span>
@@ -36,13 +34,18 @@
       </button>
     </div>
     
+    <!-- Focus topic display with quote -->
+    <div class="focus-topic-display hidden" data-testid="focus-topic-display">
+      <!-- Focus topic and quote will be displayed here -->
+    </div>
+    
     <!-- Large timer display -->
     <div class="timer-container" data-testid="timer-container">
       <div class="timer-display" data-testid="timer-display">25:00</div>
       <div class="timer-label" data-testid="timer-label">Focus Time</div>
     </div>
     
-    <!-- Control button -->
+    <!-- Control buttons -->
     <div class="controls-container">
       <button class="control-btn start-btn" data-testid="start-button">
         <span class="btn-icon">▶</span>
@@ -59,6 +62,12 @@
       <button class="control-btn-small reset-btn" data-testid="reset-button">
         <span>↻</span>
       </button>
+    </div>
+    
+    <!-- Session counter -->
+    <div class="session-counter" data-testid="session-counter">
+      <span>Sessions completed: </span>
+      <span class="session-count" data-testid="session-count">0</span>
     </div>
     
     <!-- Soundscape Player -->
@@ -79,15 +88,11 @@
         <button class="soundscape-play-btn" data-testid="soundscape-play-btn">
           <span class="play-icon">▶</span>
         </button>
-        <input type="range" class="soundscape-volume" data-testid="soundscape-volume" min="0" max="100" value="50">
-        <span class="volume-icon">🔊</span>
+        <div class="volume-control">
+          <input type="range" class="soundscape-volume" data-testid="soundscape-volume" min="0" max="100" value="50">
+          <span class="volume-icon">🔊</span>
+        </div>
       </div>
-    </div>
-    
-    <!-- Session counter -->
-    <div class="session-counter" data-testid="session-counter">
-      <span>Sessions completed: </span>
-      <span class="session-count" data-testid="session-count">0</span>
     </div>
     
     <!-- Task input section -->
@@ -112,17 +117,26 @@
       </div>
     </div>
     
-    <!-- Task cards at bottom -->
+    <!-- Task cards -->
     <div class="tasks-container" data-testid="tasks-container">
       <!-- Task cards will be dynamically added here -->
     </div>
     
-    <!-- Blocked site warning (shown when applicable) -->
+    <!-- Blocked site warning -->
     <div class="warning-message hidden" data-testid="warning-message">
       <div class="warning-icon">⚠️</div>
       <div class="warning-text">
         <strong>Focus Mode Active</strong>
         <p>This site is blocked during focus sessions. Stay focused!</p>
+      </div>
+    </div>
+    
+    <!-- Completion notification -->
+    <div class="completion-notification hidden" data-testid="completion-notification">
+      <div class="notification-icon">🎉</div>
+      <div class="notification-text">
+        <strong class="notification-title">Great job!</strong>
+        <p class="notification-message">Session completed successfully!</p>
       </div>
     </div>
   </div>
