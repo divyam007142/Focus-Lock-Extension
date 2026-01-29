@@ -1,6 +1,8 @@
 // Background service worker for FocusLock
 
 let timerInterval = null;
+let focusTabId = null;
+let savedTabs = [];
 
 // Initialize extension
 chrome.runtime.onInstalled.addListener(async () => {
@@ -20,6 +22,9 @@ chrome.runtime.onInstalled.addListener(async () => {
         soundEnabled: true,
         notificationsEnabled: true,
         strictMode: true,
+        username: '',
+        soundscapeEnabled: false,
+        selectedSoundscape: 'none',
         blacklist: [
           'facebook.com',
           'twitter.com',
@@ -44,7 +49,9 @@ chrome.runtime.onInstalled.addListener(async () => {
       state: 'idle',
       timeRemaining: 25 * 60,
       sessionsCompleted: 0,
-      lastUpdate: Date.now()
+      lastUpdate: Date.now(),
+      currentFocusTopic: '',
+      currentFocusSubject: ''
     }
   });
 });
@@ -52,39 +59,124 @@ chrome.runtime.onInstalled.addListener(async () => {
 // Handle messages from other parts of the extension
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'START_TIMER') {
-    startTimer();
-    sendResponse({ success: true });
+    startTimer(message.focusTopic, message.focusSubject).then(() => sendResponse({ success: true }));
+    return true;
   } else if (message.type === 'PAUSE_TIMER') {
     pauseTimer();
     sendResponse({ success: true });
   } else if (message.type === 'RESET_TIMER') {
     resetTimer();
     sendResponse({ success: true });
+  } else if (message.type === 'END_SESSION') {
+    endSession().then(() => sendResponse({ success: true }));
+    return true;
   } else if (message.type === 'SWITCH_MODE') {
     switchMode(message.mode);
     sendResponse({ success: true });
   } else if (message.type === 'GET_TIMER_STATE') {
     getTimerState().then(state => sendResponse(state));
-    return true; // Async response
+    return true;
   } else if (message.type === 'CHECK_URL') {
     checkUrlAndBlock(message.url).then(result => sendResponse(result));
     return true;
+  } else if (message.type === 'TAB_SWITCH_WARNING') {
+    // Notify all tabs about tab switch during focus
+    handleTabSwitchWarning();
+    sendResponse({ success: true });
   }
 });
 
+// Handle tab switch warning
+function handleTabSwitchWarning() {
+  chrome.runtime.sendMessage({ type: 'PLAY_WARNING_SOUND' }).catch(() => {});
+}
+
 // Start the timer
-async function startTimer() {
+async function startTimer(focusTopic = '', focusSubject = '') {
   const timerState = await getTimerState();
+  
+  // Save current tabs if starting focus mode
+  if (timerState.mode === 'focus' && timerState.state !== 'running') {
+    await saveCurrentTabs();
+  }
+  
   timerState.state = 'running';
   timerState.lastUpdate = Date.now();
+  timerState.currentFocusTopic = focusTopic || timerState.currentFocusTopic;
+  timerState.currentFocusSubject = focusSubject || timerState.currentFocusSubject;
   await saveTimerState(timerState);
   
   // Start interval
   if (timerInterval) clearInterval(timerInterval);
   timerInterval = setInterval(updateTimer, 1000);
   
+  // Open or switch to focus page
+  await openFocusPage();
+  
   // Broadcast state change
   broadcastTimerState();
+}
+
+// Save current tabs before focus session
+async function saveCurrentTabs() {
+  const tabs = await chrome.tabs.query({ currentWindow: true });
+  savedTabs = tabs
+    .filter(tab => !tab.url.includes('focus.html') && !tab.url.startsWith('chrome://'))
+    .map(tab => ({ url: tab.url, title: tab.title }));
+  
+  await chrome.storage.local.set({ savedTabs });
+  console.log('Saved tabs:', savedTabs.length);
+}
+
+// Restore tabs after session ends
+async function restoreTabsAfterSession() {
+  const result = await chrome.storage.local.get('savedTabs');
+  const tabsToRestore = result.savedTabs || [];
+  
+  if (tabsToRestore.length > 0) {
+    // Close focus page if it exists
+    if (focusTabId) {
+      try {
+        await chrome.tabs.remove(focusTabId);
+      } catch (e) {
+        console.log('Focus tab already closed');
+      }
+      focusTabId = null;
+    }
+    
+    // Restore saved tabs
+    for (const tabInfo of tabsToRestore) {
+      try {
+        await chrome.tabs.create({ url: tabInfo.url, active: false });
+      } catch (e) {
+        console.error('Error restoring tab:', e);
+      }
+    }
+    
+    // Clear saved tabs
+    await chrome.storage.local.set({ savedTabs: [] });
+    savedTabs = [];
+    console.log('Restored tabs:', tabsToRestore.length);
+  }
+}
+
+// Open or switch to focus page
+async function openFocusPage() {
+  const focusUrl = chrome.runtime.getURL('focus.html');
+  
+  // Check if focus page is already open
+  const tabs = await chrome.tabs.query({ url: focusUrl });
+  
+  if (tabs.length > 0) {
+    // Focus page exists, switch to it
+    focusTabId = tabs[0].id;
+    await chrome.tabs.update(focusTabId, { active: true });
+    await chrome.windows.update(tabs[0].windowId, { focused: true });
+  } else {
+    // Create new focus page
+    const tab = await chrome.tabs.create({ url: focusUrl, active: true });
+    focusTabId = tab.id;
+  }
 }
 
 // Pause the timer
@@ -97,6 +189,35 @@ async function pauseTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
   }
+  
+  broadcastTimerState();
+}
+
+// End session manually
+async function endSession() {
+  const timerState = await getTimerState();
+  const settings = await getSettings();
+  
+  // Stop timer
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  
+  // If in focus mode, complete the session
+  if (timerState.mode === 'focus') {
+    timerState.sessionsCompleted++;
+  }
+  
+  // Restore tabs
+  await restoreTabsAfterSession();
+  
+  // Reset to idle state
+  timerState.state = 'idle';
+  timerState.timeRemaining = settings.focusDuration * 60;
+  timerState.mode = 'focus';
+  timerState.lastUpdate = Date.now();
+  await saveTimerState(timerState);
   
   broadcastTimerState();
 }
@@ -209,8 +330,12 @@ async function handleTimerComplete(timerState) {
     
     if (settings.autoStartBreaks) {
       timerState.state = 'running';
+      // Stay on focus page, just switch mode
+      await openFocusPage();
     } else {
       timerState.state = 'idle';
+      // Restore tabs and close focus page
+      await restoreTabsAfterSession();
       if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
@@ -223,8 +348,11 @@ async function handleTimerComplete(timerState) {
     
     if (settings.autoStartFocus) {
       timerState.state = 'running';
+      await openFocusPage();
     } else {
       timerState.state = 'idle';
+      // Restore tabs and close focus page
+      await restoreTabsAfterSession();
       if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
@@ -288,7 +416,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
     
     if (blocked && !details.url.includes('focus.html')) {
       chrome.tabs.update(details.tabId, {
-        url: chrome.runtime.getURL('focus.html')
+        url: chrome.runtime.getURL('focus.html?blocked=true')
       });
     }
   }
@@ -302,14 +430,19 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
   if (settings.strictMode && timerState.mode === 'focus' && timerState.state === 'running') {
     const tab = await chrome.tabs.get(activeInfo.tabId);
     
-    // If switching to a non-focus page, show warning
+    // If switching away from focus page, trigger warning
     if (!tab.url.includes('focus.html')) {
       const blocked = isUrlBlocked(tab.url, settings);
       
       if (blocked) {
         chrome.tabs.update(activeInfo.tabId, {
-          url: chrome.runtime.getURL('focus.html')
+          url: chrome.runtime.getURL('focus.html?blocked=true')
         });
+      } else {
+        // Send warning message to content script
+        chrome.tabs.sendMessage(activeInfo.tabId, { 
+          type: 'SHOW_TAB_SWITCH_WARNING' 
+        }).catch(() => {});
       }
     }
   }
@@ -323,7 +456,9 @@ async function getTimerState() {
     state: 'idle',
     timeRemaining: 25 * 60,
     sessionsCompleted: 0,
-    lastUpdate: Date.now()
+    lastUpdate: Date.now(),
+    currentFocusTopic: '',
+    currentFocusSubject: ''
   };
 }
 
@@ -343,6 +478,9 @@ async function getSettings() {
     soundEnabled: true,
     notificationsEnabled: true,
     strictMode: true,
+    username: '',
+    soundscapeEnabled: false,
+    selectedSoundscape: 'none',
     blacklist: [],
     whitelist: []
   };
