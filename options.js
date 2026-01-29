@@ -23,6 +23,9 @@ async function loadSettings() {
     soundEnabled: true,
     notificationsEnabled: true,
     strictMode: true,
+    username: '',
+    soundscapeEnabled: false,
+    selectedSoundscape: 'none',
     blacklist: [
       'facebook.com',
       'twitter.com',
