@@ -47,6 +47,12 @@ function populateForm() {
     input.value = settings[setting];
   });
   
+  // Text inputs
+  document.querySelectorAll('.setting-input-text').forEach(input => {
+    const setting = input.dataset.setting;
+    input.value = settings[setting] || '';
+  });
+  
   // Checkboxes
   document.querySelectorAll('.setting-checkbox').forEach(checkbox => {
     const setting = checkbox.dataset.setting;
