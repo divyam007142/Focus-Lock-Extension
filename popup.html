@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusLock</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <div class="header">
+      <h1 class="title">🔒 FocusLock</h1>
+      <button class="settings-btn" data-testid="settings-button" title="Settings">⚙️</button>
+    </div>
+    
+    <!-- Timer display -->
+    <div class="timer-section">
+      <div class="mode-indicator" data-testid="mode-indicator">Focus Mode</div>
+      <div class="timer-display" data-testid="popup-timer-display">25:00</div>
+      <div class="progress-bar">
+        <div class="progress-fill" data-testid="progress-fill"></div>
+      </div>
+    </div>
+    
+    <!-- Controls -->
+    <div class="controls">
+      <button class="control-btn primary start-btn" data-testid="popup-start-button">
+        <span>▶</span> Start
+      </button>
+      <button class="control-btn primary pause-btn hidden" data-testid="popup-pause-button">
+        <span>⏸</span> Pause
+      </button>
+      <button class="control-btn secondary reset-btn" data-testid="popup-reset-button">
+        <span>↻</span> Reset
+      </button>
+    </div>
+    
+    <!-- Mode selector -->
+    <div class="mode-selector">
+      <button class="mode-btn active" data-mode="focus" data-testid="popup-focus-mode">
+        <span class="mode-icon">🎯</span>
+        <span class="mode-text">Focus</span>
+      </button>
+      <button class="mode-btn" data-mode="shortBreak" data-testid="popup-short-break-mode">
+        <span class="mode-icon">☕</span>
+        <span class="mode-text">Short</span>
+      </button>
+      <button class="mode-btn" data-mode="longBreak" data-testid="popup-long-break-mode">
+        <span class="mode-icon">🌴</span>
+        <span class="mode-text">Long</span>
+      </button>
+    </div>
+    
+    <!-- Stats -->
+    <div class="stats-section">
+      <div class="stat-item">
+        <span class="stat-label">Sessions Today</span>
+        <span class="stat-value" data-testid="sessions-today">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Total Focus Time</span>
+        <span class="stat-value" data-testid="total-focus-time">0h 0m</span>
+      </div>
+    </div>
+    
+    <!-- Quick actions -->
+    <div class="quick-actions">
+      <button class="action-btn" data-testid="open-focus-page-button">
+        <span>🔗</span> Open Focus Page
+      </button>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
