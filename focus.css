@@ -290,6 +290,8 @@ body {
   cursor: pointer;
   outline: none;
   min-width: 150px;
+  max-height: 200px;
+  z-index: 100;
 }
 
 .subject-selector option {
