@@ -461,6 +461,114 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* Soundscape player */
+.soundscape-container {
+  position: absolute;
+  bottom: 20rem;
+  width: 90%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.soundscape-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.soundscape-icon {
+  font-size: 1.5rem;
+}
+
+.soundscape-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.soundscape-selector {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  outline: none;
+}
+
+.soundscape-selector option {
+  background: #1f2937;
+  color: white;
+}
+
+.soundscape-play-btn {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  background: rgba(74, 222, 128, 0.3);
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+}
+
+.soundscape-play-btn:hover {
+  background: rgba(74, 222, 128, 0.5);
+  transform: scale(1.05);
+}
+
+.soundscape-volume {
+  flex: 0.6;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  cursor: pointer;
+}
+
+.soundscape-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.soundscape-volume::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.volume-icon {
+  font-size: 1.3rem;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .timer-display {
