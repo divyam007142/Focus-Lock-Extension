@@ -151,6 +151,12 @@ async function saveSettings() {
     settings[setting] = parseInt(input.value);
   });
   
+  // Get values from text inputs
+  document.querySelectorAll('.setting-input-text').forEach(input => {
+    const setting = input.dataset.setting;
+    settings[setting] = input.value.trim();
+  });
+  
   // Get values from checkboxes
   document.querySelectorAll('.setting-checkbox').forEach(checkbox => {
     const setting = checkbox.dataset.setting;
