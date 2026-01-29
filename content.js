@@ -180,11 +180,11 @@ function showFocusModeWarning() {
   document.head.appendChild(style);
   document.body.appendChild(overlay);
   
-  // Remove after 3 seconds
+  // Remove after 2 seconds
   setTimeout(() => {
     overlay.style.animation = 'slideInRight 0.3s ease reverse';
     setTimeout(() => overlay.remove(), 300);
-  }, 3000);
+  }, 2000);
 }
 
 // Play warning sound
