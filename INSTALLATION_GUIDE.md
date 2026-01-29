@@ -1,270 +1,200 @@
-# 🚀 FocusLock - Installation & Testing Guide
+# 🔒 FocusLock v2.0 - Installation Guide
 
-## Quick Installation Steps
+## 📋 Quick Installation Steps
 
-### Step 1: Open Chrome Extensions Page
+### Step 1: Load Extension in Chrome
+
 1. Open Google Chrome
-2. Navigate to: `chrome://extensions/`
-3. Or use menu: ⋮ Menu → Extensions → Manage Extensions
+2. Navigate to `chrome://extensions/` in the address bar
+3. Enable **"Developer mode"** (toggle in top-right corner)
+4. Click **"Load unpacked"** button
+5. Select the `/app` folder containing all the extension files
+6. The FocusLock extension should now appear in your extensions list
 
-### Step 2: Enable Developer Mode
-- Look for the **"Developer mode"** toggle in the top-right corner
-- Turn it **ON**
+### Step 2: Pin the Extension
 
-### Step 3: Load the Extension
-1. Click the **"Load unpacked"** button (appears after enabling Developer mode)
-2. Navigate to and select the `/app` folder
-3. Click "Select Folder"
+1. Click the **Extensions** icon (puzzle piece) in Chrome toolbar
+2. Find **FocusLock** in the list
+3. Click the **pin icon** to keep it visible in your toolbar
 
-### Step 4: Verify Installation
-- You should see **FocusLock** appear in your extensions list
-- The extension icon (🔒) should appear in your Chrome toolbar
-- Status should show as "Enabled"
+## ✨ New Features in v2.0
 
-## 🧪 Testing the Extension
+### 🎯 Enhanced Focus Mode
+- **End Session Button**: Manually end your focus session anytime
+- **End Break Button**: Skip break and return to work
+- **Auto-navigate to Focus Page**: Automatically opens focus page when session starts
+- **Tab Restoration**: All tabs are saved and restored when session ends
 
-### Test 1: Basic Timer Functionality
-1. Click the FocusLock icon in the toolbar
-2. You should see the popup with:
-   - Timer display (25:00)
-   - Mode selector (Focus/Short/Long)
-   - Start/Reset buttons
-3. Click "Start" - timer should begin counting down
-4. Click "Pause" - timer should stop
-5. Click "Reset" - timer should return to 25:00
+### 🔔 Alert System
+- **Tab Switch Alert**: Visual alert + sound when switching tabs during focus
+- **Sound Warning**: Custom error.mp3 plays on distracting actions
+- **Blocked Site Warning**: Immediate feedback for blacklisted sites
 
-### Test 2: Focus Page
-1. Click the FocusLock icon
-2. Click "Open Focus Page" button
-3. You should see:
-   - Beautiful mountain background with dark overlay
-   - Large centered timer (25:00)
-   - Mode tabs at the top (Focus/Short Break/Long Break)
-   - Control buttons (Start/Pause/Reset)
-   - Task input section with subject selector
-   - Task cards area at the bottom
+### 🎵 Soundscapes
+Choose from 5 ambient sounds to enhance focus:
+- 🌸 Spring Sounds
+- 🐦 Birds & Forest
+- 🌿 Nature Ambience
+- 🌊 Ocean Waves
+- 🌧️ Relaxing Rain
 
-### Test 3: Task Management
-1. On the focus page, select a subject (e.g., "Work")
-2. Enter a task name (e.g., "Complete project report")
-3. Click the "+" button
-4. Task should appear as a glassmorphism card at the bottom
-5. Click "✓" to mark complete (card becomes semi-transparent with strikethrough)
-6. Click "✕" to delete the task
+### 👤 Personalization
+- **Custom Username**: Set your name for personalized greetings
+- **Time-based Greetings**: Good morning/afternoon/evening messages
+- **Focus Topic Display**: Shows what you're focusing on with motivational quotes
+- **Custom Focus Prompt**: Enter your focus goal when starting sessions
 
-### Test 4: Mode Switching
-1. Click on "Short Break" tab at the top
-2. Timer should change to 5:00
-3. Click on "Long Break" tab
-4. Timer should change to 15:00
-5. Click back to "Focus" tab
-6. Timer should return to 25:00
+## 🎮 Usage Guide
 
-### Test 5: Settings Page
-1. Click the FocusLock icon
-2. Click the settings gear (⚙️) icon
-3. Settings page should open with sections:
-   - Timer Settings (durations)
-   - Behavior (auto-start options, strict mode)
-   - Notifications
-   - Blocked Sites (Blacklist)
-   - Allowed Sites (Whitelist)
-4. Try changing focus duration to 30 minutes
-5. Click "Save Settings"
-6. Return to popup - timer should now show 30:00
+### Starting a Focus Session
 
-### Test 6: Blacklist/Whitelist
-1. Open Settings page
-2. In "Blocked Sites" section, you should see default sites:
-   - facebook.com
-   - youtube.com
-   - twitter.com
-   - etc.
-3. Add a new site (e.g., "github.com")
-4. Click "Add" - site should appear in the list
-5. Click "✕" to remove it
-6. Do the same for Whitelist
-7. Click "Save Settings"
+1. Click the FocusLock icon in your toolbar
+2. When prompted, enter what you're focusing on (optional)
+3. Click **Start** button
+4. You'll automatically be redirected to the focus page
+5. All your current tabs are saved automatically
 
-### Test 7: Strict Focus Mode (The Main Feature!)
-1. Ensure "Strict Mode" is enabled in Settings
-2. Start a focus session:
-   - Click FocusLock icon → Click "Start"
-3. Try to visit a blocked site (e.g., youtube.com)
-4. You should be **automatically redirected** to the focus page
-5. A warning message should appear: "Focus Mode Active - This site is blocked"
-6. Try to open a new tab - it should open with the focus page
-7. Timer should continue counting down
+### Using Soundscapes
 
-### Test 8: Session Completion
-1. For testing, change focus duration to 1 minute in Settings
-2. Start a focus session
-3. Wait for the timer to reach 0:00
-4. You should receive:
-   - Browser notification: "Focus session complete! Time for a break."
-   - Timer automatically switches to "Short Break" mode
-   - All site restrictions are removed (you can browse normally)
+1. On the focus page, find the **Soundscapes** section
+2. Select a sound from the dropdown menu
+3. Click the **Play** button (▶)
+4. Adjust volume using the slider
+5. Click **Pause** (⏸) to stop
 
-### Test 9: Break to Focus Transition
-1. During a break session, wait for timer to complete
-2. You should receive notification: "Break is over! Ready to focus?"
-3. Timer switches back to "Focus" mode
-4. You can start the next focus session
+### Managing Tasks
 
-### Test 10: Statistics
-1. Complete a few focus sessions
-2. Open the popup
-3. Check "Sessions Today" counter - should increase with each completed session
-4. Check "Total Focus Time" - should show cumulative time (e.g., "1h 15m")
+1. On the focus page, scroll to the task input section
+2. Select a subject category (Work, Study, Exercise, etc.)
+3. Enter your task description
+4. Click the **+** button to add
+5. Click **✓** to mark complete or **✕** to delete
 
-## 🐛 Common Issues & Solutions
+### Ending a Session
 
-### Issue 1: Extension not loading
-**Solution**: 
-- Check that all files are in the correct location
-- Verify manifest.json is valid (no syntax errors)
-- Try removing and re-adding the extension
+**Option 1: Manual End**
+- Click the **End Session** button during any session
+- Confirm the action
+- All saved tabs will be restored
 
-### Issue 2: Timer not starting
-**Solution**:
-- Open Chrome DevTools (F12) on the popup
-- Check Console for any errors
-- Verify storage permissions are granted
+**Option 2: Natural Completion**
+- Let the timer run to zero
+- If breaks are enabled, you'll transition to break mode
+- If breaks are disabled, tabs restore automatically
 
-### Issue 3: Sites not being blocked
-**Solution**:
-- Ensure "Strict Mode" is enabled in Settings
-- Verify the site is in the blacklist
-- Check that the site is NOT in the whitelist
-- The timer must be RUNNING in FOCUS mode for blocking to work
+### Customizing Settings
 
-### Issue 4: Background image not showing
-**Solution**:
-- Verify `/app/assets/mountain-bg.jpg` exists
-- Check browser console for any 404 errors
-- Try reloading the extension
+1. Click the **⚙️** (gear) icon in the popup
+2. **Personal Settings**:
+   - Enter your name for personalized greetings
+3. **Timer Settings**:
+   - Adjust focus duration (1-120 minutes)
+   - Set short break length (1-60 minutes)
+   - Set long break length (1-120 minutes)
+   - Configure long break frequency
+4. **Behavior Settings**:
+   - Enable/disable auto-start for breaks
+   - Enable/disable auto-start for focus
+   - Toggle strict mode (site blocking)
+5. **Notifications**:
+   - Enable/disable sounds
+   - Enable/disable browser notifications
+6. **Blacklist/Whitelist**:
+   - Add distracting sites to block
+   - Add essential sites to whitelist
+7. Click **Save Settings**
 
-### Issue 5: Notifications not appearing
-**Solution**:
-- Check Chrome notification permissions
-- Ensure "Enable browser notifications" is checked in Settings
-- Chrome Settings → Privacy and Security → Site Settings → Notifications
+## 🎨 Features Explained
 
-## 📋 Feature Checklist
+### Greeting Display
+- Shows time-appropriate greeting (morning/afternoon/evening)
+- Displays your custom username
+- Appears at the top of the focus page
 
-Use this checklist to verify all features are working:
+### Focus Topic & Quotes
+- Displays your current focus goal
+- Shows motivational quotes based on subject
+- Changes randomly each session for variety
 
-- [ ] Timer starts and counts down correctly
-- [ ] Timer can be paused and resumed
-- [ ] Timer can be reset
-- [ ] Mode switching works (Focus/Short/Long)
-- [ ] Focus page opens with mountain background
-- [ ] Glassmorphism UI elements render correctly
-- [ ] Tasks can be added with subjects
-- [ ] Tasks can be marked complete
-- [ ] Tasks can be deleted
-- [ ] Tasks persist after closing/reopening
-- [ ] Settings can be saved
-- [ ] Timer durations can be customized
-- [ ] Blacklist can be edited
-- [ ] Whitelist can be edited
-- [ ] Blocked sites redirect to focus page during focus mode
-- [ ] New tabs open to focus page during focus mode
-- [ ] Tab switching shows warning during focus mode
-- [ ] Session completion triggers notification
-- [ ] Session counter increments correctly
-- [ ] Restrictions lift after session ends
-- [ ] Auto-start options work (if enabled)
-- [ ] Sound notifications work (if enabled)
-- [ ] Stats display correctly in popup
+### Tab Management
+- **Auto-save**: All tabs saved when focus session starts
+- **Auto-restore**: Tabs restored when session ends
+- **Smart handling**: Focus page is excluded from restoration
 
-## 🎨 Visual Verification
+### Alert System
+- **Visual Alerts**: Modal popup appears on tab switches
+- **Audio Alerts**: Error sound plays on distracting actions
+- **Frequency**: Alerts appear every time (not just once)
 
-### Focus Page Should Display:
-- ✅ Mountain background image (full screen)
-- ✅ Dark overlay (semi-transparent black)
-- ✅ Glassmorphism mode tabs at top
-- ✅ Large white timer text (centered)
-- ✅ Timer label below timer
-- ✅ Start/Pause button (glassmorphism style)
-- ✅ Reset button (smaller, circular)
-- ✅ Session counter with green number
-- ✅ Task input section (frosted glass style)
-- ✅ Subject selector dropdown
-- ✅ Task input field
-- ✅ Add button (green)
-- ✅ Task cards (frosted glass) at bottom
+## 🔧 Troubleshooting
 
-### Popup Should Display:
-- ✅ Purple gradient background
-- ✅ FocusLock title with lock emoji
-- ✅ Settings gear icon (top-right)
-- ✅ Timer display with mode indicator
-- ✅ Progress bar (green)
-- ✅ Start/Pause/Reset buttons
-- ✅ Mode selector buttons (3 buttons)
-- ✅ Statistics section (2 items)
-- ✅ "Open Focus Page" button
+### Extension Not Loading
+- Ensure all files are in the `/app` folder
+- Check that Developer Mode is enabled
+- Try clicking "Reload" button on the extension card
 
-### Settings Page Should Display:
-- ✅ Clean white sections on purple gradient background
-- ✅ Timer Settings section with number inputs
-- ✅ Behavior section with checkboxes
-- ✅ Notifications section with checkboxes
-- ✅ Blacklist section with input and list
-- ✅ Whitelist section with input and list
-- ✅ Default blacklist sites populated
-- ✅ Save button (top-right)
-- ✅ Reset button (bottom)
+### Sounds Not Playing
+- Check browser volume settings
+- Ensure sound is enabled in extension settings
+- Try clicking play button again
 
-## 🎯 Core Functionality Verification
+### Tabs Not Restoring
+- Make sure you're using the End Session button or letting timer complete
+- Check Chrome permissions for tabs access
+- Restart Chrome if issues persist
 
-### Must-Have Features Working:
-1. ✅ Pomodoro timer with customizable durations
-2. ✅ Focus/Short Break/Long Break modes
-3. ✅ Full-screen focus page with mountain background
-4. ✅ Glassmorphism UI design
-5. ✅ Strict focus mode blocks distracting sites
-6. ✅ Automatic redirect to focus page
-7. ✅ Tab creation/switching prevention
-8. ✅ Blacklist and whitelist management
-9. ✅ Task management with subjects
-10. ✅ Session tracking and statistics
-11. ✅ Browser notifications on session end
-12. ✅ Auto-unlock when session completes
-13. ✅ Settings persistence
-14. ✅ Warning displays for blocked actions
+### Focus Page Not Opening
+- Check if pop-up blocker is enabled
+- Allow pop-ups for chrome-extension:// URLs
+- Manually open via "Open Focus Page" button in popup
 
-## 📝 Testing Checklist for Developer
+## 📊 Best Practices
 
-- [ ] Install extension in Chrome
-- [ ] Test basic timer operations
-- [ ] Test mode switching
-- [ ] Test task creation and management
-- [ ] Test settings modification
-- [ ] Test blacklist/whitelist editing
-- [ ] Test strict mode blocking
-- [ ] Test session completion flow
-- [ ] Test notification system
-- [ ] Test statistics accuracy
-- [ ] Test UI responsiveness
-- [ ] Test glassmorphism effects
-- [ ] Test background image display
-- [ ] Verify all data persistence
-- [ ] Test auto-start features
-- [ ] Test reset functionality
+1. **Set Realistic Goals**: Start with 25-minute focus sessions
+2. **Use Soundscapes**: Background sounds can improve concentration
+3. **Add Tasks**: Track what you need to accomplish
+4. **Take Breaks**: Don't skip breaks - they're essential for productivity
+5. **Customize Blacklist**: Add your personal distracting sites
+6. **Personalize**: Set your name for a more engaging experience
 
-## 🚀 Ready to Use!
+## 🆘 Support
 
-Once all tests pass, your FocusLock extension is ready for productive use! 
+If you encounter any issues:
+1. Check the browser console for errors (F12 → Console)
+2. Verify all audio files are in `/app/assets/` folder
+3. Ensure manifest.json is properly formatted
+4. Try reinstalling the extension
 
-**Pro Tips:**
-- Start with default settings to get familiar
-- Add your most distracting sites to blacklist
-- Add work/study resources to whitelist
-- Use task manager to track what you accomplish
-- Check stats to see your productivity progress
+## 📁 File Structure
 
----
+```
+/app/
+├── manifest.json          # Extension configuration
+├── background.js          # Service worker (timer, tab management)
+├── focus.html            # Full-screen focus page
+├── focus.js              # Focus page logic
+├── focus.css             # Focus page styles
+├── popup.html            # Extension popup
+├── popup.js              # Popup logic
+├── popup.css             # Popup styles
+├── options.html          # Settings page
+├── options.js            # Settings logic
+├── options.css           # Settings styles
+├── content.js            # Content script (site blocking, alerts)
+├── assets/
+│   ├── mountain-bg.jpg   # Background image
+│   ├── error.mp3         # Alert sound
+│   ├── spring.mp3        # Soundscape
+│   ├── birds-forest.mp3  # Soundscape
+│   ├── nature-ambience.mp3 # Soundscape
+│   ├── ocean-waves.mp3   # Soundscape
+│   └── relaxing-rain.mp3 # Soundscape
+└── icons/
+    ├── icon-16.png       # Extension icons
+    ├── icon-48.png
+    └── icon-128.png
+```
 
-**Happy focusing! 🔒🎯**
+## 🎉 Enjoy FocusLock!
+
+Stay focused, stay productive, and achieve your goals! 🚀
