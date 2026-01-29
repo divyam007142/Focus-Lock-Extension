@@ -121,11 +121,11 @@ function showTabSwitchWarning() {
   
   document.body.appendChild(overlay);
   
-  // Remove after 3 seconds
+  // Remove after 2 seconds
   setTimeout(() => {
     overlay.style.animation = 'scaleOut 0.3s ease';
     setTimeout(() => overlay.remove(), 300);
-  }, 3000);
+  }, 2000);
 }
 
 // Show focus mode warning overlay
