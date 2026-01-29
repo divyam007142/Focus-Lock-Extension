@@ -192,7 +192,6 @@ A powerful Chrome extension that combines the Pomodoro technique with strict foc
 
 This extension is for personal and educational use.
 
-## 🙏 Credits
 
 Made with 💛 Lunar Vibes
 ---
